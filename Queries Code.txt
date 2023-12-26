@@ -1,0 +1,55 @@
+Analysis Questions
+
+--Retrieve all records for a specific city (e.g., Mumbai).
+
+select * from airquality
+where city = 'Mumbai'
+
+--Find The average AQI value for each state.
+
+SELECT
+  state,
+  AVG(currentaqivalue) AS avg_aqi
+FROM
+  airquality
+GROUP BY
+  state;
+
+--Identify cities where AQI is above a certain threshold (e.g.,, AQI>200)?
+
+select city, currentaqivalue
+from airquality
+where currentaqivalue>200;
+
+--count the number of records with insufficent data?
+
+select count(*) as Insufficent_datacount
+from airquality
+where currentaqivalue is null;
+
+--Find the highest AQI value along with the corresponding city and state?
+
+select state,city,currentaqivalue
+from airquality
+order by currentaqivalue desc
+limit 1;
+
+--Calculate the overall average AQI for the entire dataset.
+
+select avg(currentaqivalue) as overall_avg_aqi
+from airquality;
+
+
+--Retrieve records for states with more than five city.
+select State, count(distinct City) 
+from  airquality
+group by State
+Having count(distinct City) >5;
+
+
+--Find the cities in a specific state with AQI less than 50?
+
+select State, City, currentaqivalue
+from airquality
+where currentaqivalue<50
+order by currentaqivalue 
